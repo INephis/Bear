@@ -1,0 +1,46 @@
+public class Main {
+    public static void main(String[] args) {
+
+        int size = 5; //size of the dungeon
+        char[][] maze = new char[2 * size+1][2 * size+1];
+
+        for (int i = 0; i < 2 * size + 1; i++) {
+            for (int j = 0; j < 2 * size + 1; j++) {
+                if(i == 0 && j == 0)
+                    maze[i][j] = '\u250F';          //left upper corner
+                else if(i==2*size && j==0)
+                    maze[i][j] ='\u2517';           //left bottom corner
+                else if(i==0 && j == 2*size)
+                    maze[i][j] ='\u2513';           //right upper corner
+                else if(i==2*size && j==2*size)
+                    maze[i][j] ='\u251B';           //right bottom corner
+                else if( j ==0 || j == 2 * size )
+                    maze[i][j] ='\u2503';           //floor
+                else if(i==0 || i == 2 * size)
+                    maze[i][j] ='\u2501';           //ceiling
+                else {
+                    if (j % 2 == 0)
+                        maze[i][j] = ' ';
+                    else {
+                        int rnd = (int) (Math.random() * 5);
+                        switch (rnd) {
+                            case 0 -> maze[i][j] = '\u251C';
+                            case 1 -> maze[i][j] = '\u2524';
+                            case 2 -> maze[i][j] = '\u252C';
+                            case 3 -> maze[i][j] = '\u2534';
+                            case 4 -> maze[i][j] = '\u253C';
+                        }
+                    }
+                }
+            }
+        }
+
+        for (char[] chars : maze) {
+            for (int j = 0; j < maze.length; j++) {
+                System.out.print(chars[j]);
+            }
+            System.out.println();
+        }
+
+    }
+}
