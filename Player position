@@ -1,0 +1,81 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+
+        int size = 5; //size of the dungeon
+        
+        char[][] maze = makeMaze(size);
+        int rndX = (int)(Math.random()* (maze.length-1) + 1);
+        int rndY = (int)((Math.random()* (maze.length-1) + 1)/2 ) * 2;
+        System.out.println(rndX);
+        System.out.println(rndY);
+
+        Scanner scanner = new Scanner(System.in);
+        String command = scanner.nextLine();
+
+        while(!(command.equals("Q"))) {
+            drawMaze(maze,rndX, rndY, command);
+        command = scanner.nextLine();
+    };
+
+
+    }
+
+    static char[][] makeMaze(int size){
+        char[][] maze = new char[2 * size+1][2 * size+1];
+
+        for (int i = 0; i < 2 * size + 1; i++) {
+            for (int j = 0; j < 2 * size + 1; j++) {
+                if(i == 0 && j == 0)
+                    maze[i][j] = '\u250F';          //left upper corner
+                else if(i==2*size && j==0)
+                    maze[i][j] ='\u2517';           //left bottom corner
+                else if(i==0 && j == 2*size)
+                    maze[i][j] ='\u2513';           //right upper corner
+                else if(i==2*size && j==2*size)
+                    maze[i][j] ='\u251B';           //right bottom corner
+                else if( j ==0 || j == 2 * size )
+                    maze[i][j] ='\u2503';           //walls
+                else if(i==0 || i == 2 * size)
+                    maze[i][j] ='\u2501';           //ceiling
+                else  if (j % 2 == 0)
+                    maze[i][j] = ' ';
+                else {
+                    int rnd = (int) (Math.random() * 5);
+                    switch (rnd) {
+                        case 0 -> maze[i][j] = '\u251C';
+                        case 1 -> maze[i][j] = '\u2524';
+                        case 2 -> maze[i][j] = '\u252C';
+                        case 3 -> maze[i][j] = '\u2534';
+                        case 4 -> maze[i][j] = '\u253C';
+                    }
+                }//inside walls
+            }
+        }
+
+        return maze;
+    }
+
+    static void drawMaze(char[][] maze, int rndX, int rndY, String dir){
+
+        for (int i = 0; i < maze.length; i++) {
+            for (int j = 0; j < maze[i].length; j++) {
+                if (i == rndX && j == rndY) {
+                    switch (dir){
+                        case "A" -> System.out.print('\u2190'); //left
+                        case "W" -> System.out.print('\u2191'); //up
+                        case "S" -> System.out.print('\u2193'); //down
+                        case "D" -> System.out.print('\u2192'); //right
+                    }
+
+                } else {
+                    System.out.print(maze[i][j]);
+                }
+
+            }
+            System.out.println();
+        }
+    }
+
+}
