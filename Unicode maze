@@ -15,9 +15,9 @@ public class Main {
                 else if(i==2*size && j==2*size)
                     maze[i][j] ='\u251B';           //right bottom corner
                 else if( j ==0 || j == 2 * size )
-                    maze[i][j] ='\u2503';           //floor
+                    maze[i][j] ='\u2503';           //walls
                 else if(i==0 || i == 2 * size)
-                    maze[i][j] ='\u2501';           //ceiling
+                    maze[i][j] ='\u2501';           //floor/ceiling
                 else {
                     if (j % 2 == 0)
                         maze[i][j] = ' ';
@@ -29,7 +29,7 @@ public class Main {
                             case 2 -> maze[i][j] = '\u252C';
                             case 3 -> maze[i][j] = '\u2534';
                             case 4 -> maze[i][j] = '\u253C';
-                        }
+                        } //inside walls
                     }
                 }
             }
